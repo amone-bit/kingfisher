@@ -17,13 +17,12 @@ rules:
       content:
         request:
           method: GET
-        # smallest public-data endpoint: returns JSON style definition
-        url: https://api.mapbox.com/styles/v1/mapbox/streets-v11?access_token={{ TOKEN }}
-        response_matcher:
-          - report_response: true
-          - type: StatusMatch
-            status: [200]
-          - type: JsonValid
+          url: https://api.mapbox.com/styles/v1/mapbox/streets-v11?access_token={{ TOKEN }}
+          response_matcher:
+            - report_response: true
+            - type: StatusMatch
+              status: [200]
+            - type: JsonValid
 
   - name: Mapbox Secret Access Token
     id: kingfisher.mapbox.2
@@ -42,12 +41,12 @@ rules:
       content:
         request:
           method: GET
-        url: https://api.mapbox.com/styles/v1/mapbox/streets-v11?access_token={{ TOKEN }}
-        response_matcher:
-          - report_response: true
-          - type: StatusMatch
-            status: [200]
-          - type: JsonValid
+          url: https://api.mapbox.com/styles/v1/mapbox/streets-v11?access_token={{ TOKEN }}
+          response_matcher:
+            - report_response: true
+            - type: StatusMatch
+              status: [200]
+            - type: JsonValid
 
   - name: Mapbox Temporary Access Token
     id: kingfisher.mapbox.3
@@ -66,9 +65,9 @@ rules:
       content:
         request:
           method: GET
-        url: https://api.mapbox.com/styles/v1/mapbox/streets-v11?access_token={{ TOKEN }}
-        response_matcher:
-          - report_response: true
-          - type: StatusMatch
-            status: [200]
-          - type: JsonValid
+          url: https://api.mapbox.com/styles/v1/mapbox/streets-v11?access_token={{ TOKEN }}
+          response_matcher:
+            - report_response: true
+            - type: StatusMatch
+              status: [200]
+            - type: JsonValid

@@ -10,8 +10,7 @@ rules:
       (                                               
         pk_live_                                  
         (?:[0-9A-Za-z]{6}){4,30}
-      )                                               
-      (?=$|[\s"'])                                   
+      )                                 
     min_entropy: 3.3
     confidence: medium
     categories: [api, key]
@@ -33,11 +32,8 @@ rules:
         )_live_
         (?:[0-9A-Za-z]{8}){3,25}                    
       )
-      (?=$|[\s"'])
-
     min_entropy: 3.3
     confidence: medium
-    categories: [api, key]
     examples:
       - stripe_secret_key = sk_live_f01c79xuuug7yodgzj5ws0h1x2kyvho3
       - "strp_sec_key: rk_live_4haG9YwGkL2hXqTj5pSzo8FzB3uCwE7n"
@@ -50,11 +46,11 @@ rules:
           headers:
             Authorization: Bearer {{ TOKEN }}
             Accept: application/json
-        url: https://api.stripe.com/v1/account        
-        response_matcher:
-          - report_response: true
-          - type: StatusMatch
-            status: [200]                             
-          - type: WordMatch
-            match_all_words: true
-            words: ['"object":"account"']
+          url: https://api.stripe.com/v1/account        
+          response_matcher:
+            - report_response: true
+            - type: StatusMatch
+              status: [200]                             
+            - type: WordMatch
+              match_all_words: true
+              words: ['"object":"account"']
