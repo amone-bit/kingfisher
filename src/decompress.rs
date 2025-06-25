@@ -389,7 +389,7 @@ mod tests {
     fn smoke_decompress_nested_tar_gz_archives() -> anyhow::Result<()> {
         use std::{
             fs::File,
-            io::{Read, Write},
+            io::Read,
             path::PathBuf,
         };
 
