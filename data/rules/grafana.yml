@@ -78,32 +78,25 @@ rules:
           method: GET
           headers:
             Authorization: Bearer {{ TOKEN }}
-        response_matcher:
-          - report_response: true 
-          - status:
-              - 200              
-            type: StatusMatch
-        url: "{{ GRAFANADOMAIN }}/api/access-control/me"
+          response_matcher:
+            - report_response: true 
+            - status:
+                - 200              
+              type: StatusMatch
+          url: "{{ GRAFANADOMAIN }}/api/access-control/me"
     depends_on_rule:
       - rule_id: kingfisher.grafana.4
         variable: GRAFANADOMAIN
-        
+
   - name: Grafana Domain
     id: kingfisher.grafana.4
     pattern: |
-      (?xi)                 
-      \b
-      (
-        (?:https?://)?              
-        (?:                        
-          (?:[A-Za-z0-9-]+\.)*        
-          grafana                     
-          (?:\.[A-Za-z0-9-]+)+     
-        )                           
-        (?:\:\d{2,5})?              
-        (?:[/?#][^\s]*)?           
-      )   
-      \b
+      (?xi)                                
+      (?:https?://)?              
+      (?:[A-Za-z0-9-]+\.)*                 
+      grafana\.[A-Za-z0-9.-]+           
+      (?::\d{2,5})?                        
+      (?:[/?\#]\S*)?        
     min_entropy: 3.0               
     visible: false
     confidence: medium
