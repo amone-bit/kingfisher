@@ -2,9 +2,9 @@ rules:
   - name: Intercom API Token
     id: kingfisher.intercom.1
     pattern: |
-      (?xi)                                 
-      (?:^|[\s"'=])                           
+      (?xi)  
       (?:intercom(?:_access)?|ic)       
+      (?:.|[\n\r]){0,16}?                  
       (?:SECRET|PRIVATE|ACCESS|KEY|TOKEN)
       (?:.|[\n\r]){0,16}?                          
       (                               
