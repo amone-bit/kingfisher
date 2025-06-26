@@ -14,7 +14,7 @@ rules:
   - name: Google OAuth Client Secret
     id: kingfisher.google.2
     pattern: |
-      (?x)
+      (?xi)
       \b
       (GOCSPX-[A-Z0-9_-]{28})
       (?:[^A-Z0-9_-] | $)
@@ -41,7 +41,7 @@ rules:
   - name: Google OAuth Access Token
     id: kingfisher.google.4
     pattern: |
-      (?x)
+      (?xi)
       \b
       (ya29\.[0-9A-Z_-]{20,1024})
       (?: [^0-9A-Z_-]|$)
@@ -65,7 +65,7 @@ rules:
   - name: Google OAuth Credentials
     id: kingfisher.google.6
     pattern: |
-      (?x)
+      (?xi)
       \b
       ([0-9]+-[a-z0-9_]{32}\.apps\.googleusercontent\.com)
       (?:

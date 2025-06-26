@@ -36,7 +36,13 @@ rules:
 
   - name: GitLab Runner Registration Token
     id: kingfisher.gitlab.2
-    pattern: '\b(GR1348941[0-9A-Z_-]{20})(?:\b|$)'
+    pattern: |
+      (?xi)
+      \b
+      (
+        GR1348941[0-9A-Z_-]{20}
+      )
+      \b
     examples:
       - |
         sudo gitlab-runner register \
@@ -69,7 +75,13 @@ rules:
 
   - name: GitLab Pipeline Trigger Token
     id: kingfisher.gitlab.3
-    pattern: '\b(glptt-[0-9a-f]{40})\b'
+    pattern: |
+      (?xi)
+      \b
+      (
+        glptt-[0-9a-f]{40}
+      )
+      \b
     examples:
       - |
         curl    \
