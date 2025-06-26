@@ -171,7 +171,7 @@ pub fn check_for_update(global_args: &GlobalArgs, base_url: Option<&str>) -> Opt
             "{}",
             styles
                 .style_finding_active_heading
-                .apply_to("Run `brew upgrade kingfisher` to install the new version.")
+            .apply_to("Run `brew upgrade kingfisher` to install the new version.")
         );
     }
 
