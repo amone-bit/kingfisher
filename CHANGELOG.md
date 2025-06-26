@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.15.0]
+- Ensuring temp files are cleaned up
+- Applying visual style to the update check output
+
 ## [1.14.0]
 - Fixed several malformed rules
 - Now validating that response_matcher is present in validation section of all rules
