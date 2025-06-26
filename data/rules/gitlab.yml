@@ -50,6 +50,8 @@ rules:
         --run-untagged="true" \
         --locked="false" \
         --access-level="not_protected"
+    references:
+      - https://docs.gitlab.com/api/runners/
     validation:
       type: Http
       content:
@@ -62,7 +64,7 @@ rules:
           response_matcher:
             - report_response: true
             - type: StatusMatch
-              status: [200, 201]
+              status: 200
           url: https://gitlab.com/api/v4/runners/verify
 
   - name: GitLab Pipeline Trigger Token
@@ -76,6 +78,8 @@ rules:
         --no-progress-meter \
         -F token=glptt-0d66598d696a02da33fb65e2a041f607c68ea50d \
         -F ref=main
+    references:
+      - https://docs.gitlab.com/api/pipeline_triggers/
     validation:
       type: Http
       content:
@@ -86,5 +90,6 @@ rules:
           response_matcher:
             - report_response: true
             - type: StatusMatch
-              status: [200]
+              status: 
+                - 200
           url: https://gitlab.com/api/v4/ci/pipeline_triggers/{{ TOKEN }}

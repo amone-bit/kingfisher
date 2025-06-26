@@ -7,8 +7,7 @@ use std::{
 use self_update::{backends::github::Update, cargo_crate_version, errors::Error as UpdError};
 use tracing::{error, info, warn};
 
-use crate::cli::global::GlobalArgs;
-use crate::reporter::styles::Styles;
+use crate::{cli::global::GlobalArgs, reporter::styles::Styles};
 
 /// Return `true` when the canonical executable path lives inside a Homebrew Cellar.
 /// Works for Intel macOS (/usr/local/Cellar), Apple‑Silicon macOS (/opt/homebrew/Cellar)
@@ -18,9 +17,7 @@ fn installed_via_homebrew() -> bool {
         std::env::current_exe().ok().and_then(|p| fs::canonicalize(p).ok())
     }
 
-    canonical_exe()
-        .map(|p| p.components().any(|c| c.as_os_str() == "Cellar"))
-        .unwrap_or(false)
+    canonical_exe().map(|p| p.components().any(|c| c.as_os_str() == "Cellar")).unwrap_or(false)
 }
 
 /// Check GitHub for a newer Kingfisher release.
@@ -34,9 +31,7 @@ pub fn check_for_update(global_args: &GlobalArgs, base_url: Option<&str>) -> Opt
 
     let is_brew = installed_via_homebrew();
     if is_brew {
-        info!(
-            "Homebrew install detected – will notify about updates but not self‑update"
-        );
+        info!("Homebrew install detected – will notify about updates but not self‑update");
     }
 
     info!("Checking for updates…");
