@@ -29,6 +29,15 @@ fn default_true() -> bool {
     true
 }
 
+fn default_status_matcher() -> Vec<ResponseMatcher> {
+    vec![ResponseMatcher::StatusMatch {
+        r#type: "StatusMatch".to_string(),
+        status: vec![200],
+        match_all_status: false,
+        negative: false,
+    }]
+}
+
 /// Represents various types of validation that a rule can perform.
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord, Hash, Clone)]
 #[serde(tag = "type", content = "content")]
@@ -65,13 +74,24 @@ pub struct HttpRequest {
     #[serde(default)]
     pub headers: BTreeMap<String, String>,
     #[serde(default)]
-    pub response_matcher: Vec<ResponseMatcher>,
+    pub response_matcher: Option<Vec<ResponseMatcher>>,
     #[serde(default)]
     pub multipart: Option<MultipartConfig>,
     // allow HTML only when explicitly set true
     #[serde(default = "default_false")]
     pub response_is_html: bool,
 }
+
+
+impl HttpRequest {
+    /// Return the configured response matchers or a default StatusMatch 200.
+    pub fn response_matchers_or_default(&self) -> Vec<ResponseMatcher> {
+        self.response_matcher
+            .clone()
+            .unwrap_or_else(default_status_matcher)
+    }
+}
+
 
 /// Configuration for multipart HTTP requests.
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord, Hash, Clone)]

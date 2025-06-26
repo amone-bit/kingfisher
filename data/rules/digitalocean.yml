@@ -60,9 +60,9 @@ rules:
               "grant_type": "refresh_token",
               "refresh_token": "{{ TOKEN }}"
             }
-        response_matcher:
-          - report_response: true
-          - type: StatusMatch          
-            status: 
-              - 200
-          - type: JsonValid          
+          response_matcher:
+            - report_response: true
+            - type: StatusMatch          
+              status: 
+                - 200
+            - type: JsonValid          

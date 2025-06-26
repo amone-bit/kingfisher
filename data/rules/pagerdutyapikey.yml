@@ -12,9 +12,10 @@ rules:
           pagerduty[_-]? |
           pagerduty
       )
-      (?:.|[\n\r]){0,16}?
+      \W{0,20}
       (?:SECRET|PRIVATE|ACCESS|KEY|TOKEN)
-      (?:.|[\n\r]){0,16}?                     
+      (?:.|[\n\r]){0,16}?         
+      \b            
       (                                                          
         u\+[A-Z0-9_+-]{18}         |  # personal user token (20 chars)
         [A-Z0-9_-]{20}             |  # legacy PAT (20 chars, mixed case)
@@ -28,7 +29,7 @@ rules:
       - pd_key = u+3xVszZ-b4m+T6d23KA
       - Token token=ABCDEF1234567890ABCDEF1234567890 
     references:
-      - https://developer.pagerduty.com/api-reference/c96e889522dd6-list-users   
+      - https://developer.pagerduty.com/api-reference/4555ca1c983d0-get-the-current-user    
     validation:
       type: Http
       content:
@@ -37,11 +38,10 @@ rules:
           url: https://api.pagerduty.com/users          
           headers:
             Authorization: Token token={{ TOKEN }}
-            Accept: application/vnd.pagerduty+json;version=2
-            Content-Type: application/json
-        response_matcher:
-          - report_response: true
-          - type: StatusMatch
-            status: [200]                                 
-          - type: WordMatch                                
-            words: ['"user":']
+            Accept: application/json
+          response_matcher:
+            - report_response: true
+            - type: JsonValid                              
+            - type: WordMatch                                
+              words: 
+                - '"users":'

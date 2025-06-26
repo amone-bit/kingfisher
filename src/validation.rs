@@ -514,8 +514,11 @@ async fn timed_validate_single_match<'a>(
 
                     m.validation_response_status = status;
                     m.validation_response_body = body.clone();
+                    let matchers = http_validation
+                        .request
+                        .response_matchers_or_default();
                     m.validation_success = httpvalidation::validate_response(
-                        &http_validation.request.response_matcher,
+                        &matchers,
                         &body,
                         &status,
                         &headers,
