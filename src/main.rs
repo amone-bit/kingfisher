@@ -191,7 +191,9 @@ async fn async_main(args: CommandLineArgs) -> Result<()> {
             run_scan(&args.global_args, &scan_args, &rules_db, Arc::clone(&datastore)).await?;
             let exit_code = determine_exit_code(&datastore);
 
-            temp_dir.close()?;
+            if let Err(e) = temp_dir.close() {
+                eprintln!("Failed to close temporary directory: {}", e);
+            }
             std::process::exit(exit_code);
         }
         Command::Rules(ref rule_args) => match &rule_args.command {
