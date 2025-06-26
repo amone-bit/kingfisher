@@ -2,8 +2,7 @@ rules:
   - name: Travis CI Token
     id: kingfisher.travisci.1
     pattern: |
-      (?x)
-      (?i)
+      (?xi)
       \b
       travis
       (?:.|[\\n\r]){0,16}?

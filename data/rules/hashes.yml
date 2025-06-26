@@ -1,7 +1,7 @@
 rules:
   - name: Password Hash (md5crypt)
     id: kingfisher.pwhash.1
-    pattern: '(\$1\$[./A-Za-z0-9]{8}\$[./A-Za-z0-9]{22})'
+    pattern: '(\$1\$[./A-Z0-9]{8}\$[./A-Z0-9]{22})'
     references:
       - https://en.wikipedia.org/wiki/Crypt_(C)#MD5-based_scheme
       - https://unix.stackexchange.com/a/511017
@@ -16,7 +16,7 @@ rules:
     id: kingfisher.pwhash.2
     # Format from Wikipedia:
     #   $2<a/b/x/y>$[cost]$[22 character salt][31 character hash]
-    pattern: '(\$2[abxy]\$\d+\$[./A-Za-z0-9]{53})'
+    pattern: '(\$2[abxy]\$\d+\$[./A-Z0-9]{53})'
     references:
       - https://en.wikipedia.org/wiki/Bcrypt
       - https://hashcat.net/wiki/doku.php?id=example_hashes
@@ -35,8 +35,8 @@ rules:
       (
       \$ 5
       (?: \$ rounds=\d+ )?
-      \$ [./A-Za-z0-9]{8,16}
-      \$ [./A-Za-z0-9]{43}
+      \$ [./A-Z0-9]{8,16}
+      \$ [./A-Z0-9]{43}
       )
     references:
       - https://en.wikipedia.org/wiki/Crypt_(C)#Key_derivation_functions_supported_by_crypt
@@ -55,8 +55,8 @@ rules:
       (
       \$ 6
       (?: \$ rounds=\d+ )?
-      \$ [./A-Za-z0-9]{8,16}
-      \$ [./A-Za-z0-9]{86}
+      \$ [./A-Z0-9]{8,16}
+      \$ [./A-Z0-9]{86}
       )
     references:
       - https://en.wikipedia.org/wiki/Crypt_(C)#Key_derivation_functions_supported_by_crypt
@@ -73,8 +73,8 @@ rules:
       (?x)
       (
       \$ 8
-      \$ [./A-Za-z0-9]{8,16}
-      \$ [./A-Za-z0-9]{43}
+      \$ [./A-Z0-9]{8,16}
+      \$ [./A-Z0-9]{43}
       )
     references:
       - https://en.wikipedia.org/wiki/Crypt_(C)#Key_derivation_functions_supported_by_crypt

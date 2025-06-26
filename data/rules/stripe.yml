@@ -9,7 +9,7 @@ rules:
       (?:.|[\n\r]){0,32}?
       (                                               
         pk_live_                                  
-        (?:[0-9A-Za-z]{6}){4,30}
+        (?:[0-9A-Z]{6}){4,30}
       )                                 
     min_entropy: 3.3
     confidence: medium
@@ -30,7 +30,7 @@ rules:
         (?:                                           
           sk|rk                                        
         )_live_
-        (?:[0-9A-Za-z]{8}){3,25}                    
+        (?:[0-9A-Z]{8}){3,25}                    
       )
     min_entropy: 3.3
     confidence: medium

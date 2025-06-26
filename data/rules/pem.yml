@@ -5,7 +5,7 @@ rules:
       (?x)
       -----BEGIN\ .{0,20}\ ?PRIVATE\ KEY\ ?.{0,20}-----
       \s*
-      ( (?: [a-zA-Z0-9+/=\s"',] | \\r | \\n ) {50,} )
+      ( (?: [A-Z0-9+/=\s"',] | \\r | \\n ) {50,} )
       \s*
       -----END\ .{0,20}\ ?PRIVATE\ KEY\ ?.{0,20}-----
     min_entropy: 4.5
@@ -57,9 +57,9 @@ rules:
           | LS0tLS1CRUdJTiBEU0EgUFJJVkFURSBLRVktLS0t             (?# prefix of base64 encoding of `-----BEGIN DSA PRIVATE KEY-----` )
           | LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0t             (?# prefix of base64 encoding of `-----BEGIN EC PRIVATE KEY-----` )
           )
-        [a-zA-Z0-9+/=]{50,}
+        [A-Z0-9+/=]{50,}
       )
-      (?: [^a-zA-Z0-9+/=] | $ )
+      (?: [^A-Z0-9+/=] | $ )
     min_entropy: 4.5
     confidence: high
     prevalidated: false
