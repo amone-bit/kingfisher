@@ -16,7 +16,7 @@ rules:
     min_entropy: 4.0
     confidence: medium
     examples:
-      - Authorization: Bearer AAAAAAAAAAAAAAAAAAAAAAL6NcQAAAAABkCyZ4E5jEXAMPLE0wuJbhVN8
+      - "Authorization: Bearer AAAAAAAAAAAAAAAAAAAAAAL6NcQAAAAABkCyZ4E5jEXAMPLE0wuJbhVN8"
       - TWITTER_BEARER="AAAAAAAAAAAAAAAAAAAAAAAYk9SClAAAAAAAfkwAAAABAAAAA"
     validation:
       type: Http
