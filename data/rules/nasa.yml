@@ -26,10 +26,10 @@ rules:
           url: https://api.nasa.gov/planetary/apod?date=1995-06-16&api_key={{ TOKEN }}
           headers:
             Accept: application/json
-        response_matcher:
-          - report_response: true
-          - type: StatusMatch         
-            status: [200]
-          - type: WordMatch
-            words:
-              - '"url":'
+          response_matcher:
+            - report_response: true
+            - type: StatusMatch         
+              status: [200]
+            - type: WordMatch
+              words:
+                - '"url":'

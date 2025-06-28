@@ -271,6 +271,7 @@ kingfisher github repos list --organization my-org
 - `--no-extract-archives`: Do not scan inside archives
 - `--extraction-depth <N>`: Specifies how deep nested archives should be extracted and scanned (default: 2)
 - `--redact`: Replaces discovered secrets with a one-way hash for secure output
+- `--ignore-tests`: Skip files or directories whose path component contains _test_, _spec_, _fixture_, _example_, or _sample_ (case-insensitive)
 
 ## Finding Fingerprint
 
