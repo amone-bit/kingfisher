@@ -6,7 +6,7 @@ rules:
       \b                       
       (?:twitter|x.com|twtr)?
       (?:.|[\n\r]){0,16}?
-      (?:SECRET|PRIVATE|ACCESS|KEY|TOKEN)
+      (?:SECRET|PRIVATE|ACCESS|KEY|TOKEN|BEARER)
       (?:.|[\n\r]){0,16}?
       \b
       (                                      
@@ -16,8 +16,8 @@ rules:
     min_entropy: 4.0
     confidence: medium
     examples:
-      - "Authorization: Bearer AAAAAAAAAAAAAAAAAAAAAAL6NcQAAAAABkCyZ4E5jEXAMPLE0wuJbhVN8"
-      - TWITTER_BEARER="AAAAAAAAAAAAAAAAAAAAAAAYk9SClAAAAAAAfkwAAAABAAAAA"
+      - "Twitter Secret: Bearer AAAAAAAAAAAAAAAAAAAb342O1ksbnZiwemJv0g9LrF6cRazflLJEDbmmuAr8GQbDkDrYHoqPM1xr8tmP5LGW1Vq_soJIsolxqOXtAPA2hUGXIBYubxWPLVZkUs7jYBizqlDRDSHRGXKP2nuCzdbNlxKcgMQzrm"
+      - TWITTER_BEARER="AAAAAAAAAAAAAAxrrTSuijZNLygaTAEMAc_iY1nOdFRc1OP4fpMZiEkTQ4D-QaCvOhvBvpu5zwH67VvwE9MlmL78ptDdFP_FX6fgcJnQOcvsedOXNP9t3D1fYkJcJT3kXldAIJJ"
     validation:
       type: Http
       content:
