@@ -9,10 +9,10 @@ Kingfisher is a blazingly fast secret‑scanning and validation tool built in Ru
 
 </p>
 
-Kingfisher originated as a fork of **[Nosey Parker](https://github.com/praetorian-inc/noseyparker)** by Praetorian Security, Inc, and is built atop the incredible work contributed by the Nosey Parker community.
+Kingfisher originated as a fork of **[Nosey Parker](https://github.com/praetorian-inc/noseyparker)** by Praetorian Security, Inc, and is built atop their incredible work and the work contributed by the Nosey Parker community.
 
 
-- **MongoDB Blog**: [Introducing Kingfisher: Real-Time Secret Detection and Validation](https://www.mongodb.com/blog/post/product-release-announcements/introducing-kingfisher-real-time-secret-detection-validation)
+**MongoDB Blog**: [Introducing Kingfisher: Real-Time Secret Detection and Validation](https://www.mongodb.com/blog/post/product-release-announcements/introducing-kingfisher-real-time-secret-detection-validation)
 
 ## Key Features
 
