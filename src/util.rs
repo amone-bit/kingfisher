@@ -146,6 +146,7 @@ mod tests {
             "/project/spec/controllers/user_spec.rb",
             "C:\\repo\\fixtures\\config.json",
             "examples/hello_world/main.go",
+            "/home/user/scripts/local-testCert.pem",
             "samples/data/sample_input.txt",
         ];
 
