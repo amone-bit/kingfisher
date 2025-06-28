@@ -101,7 +101,7 @@ kingfisher scan ~/src/myrepo --no-validate
 ### Display only secrets confirmed active by third‑party APIs
 
 ```bash
-kingfisher scan ./service --only-valid
+kingfisher scan /path/to/repo --only-valid
 ```
 
 ### Output JSON and capture to a file
@@ -113,7 +113,7 @@ kingfisher scan . --format json | tee kingfisher.json
 ### Output SARIF directly to disk
 
 ```bash
-kingfisher scan . --format sarif --output findings.sarif
+kingfisher scan /path/to/repo --format sarif --output findings.sarif
 ```
 
 ### Pipe any text directly into Kingfisher by passing `-`
@@ -135,6 +135,12 @@ kingfisher scan /path/to/repo --rule kingfisher.aws
 
 ```bash
 kingfisher scan /path/to/repo --rule-stats
+```
+
+### Scan while ignoring likely test files
+```bash
+# Scan source but skip unit / integration tests
+kingfisher scan ./my-project --ignore-tests
 ```
 
 ---
