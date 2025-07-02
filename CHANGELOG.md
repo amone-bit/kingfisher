@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.19.0]
+- JSON output was missing committer name and email
 
 ## [1.18.1]
 - Restored --version cli argument
