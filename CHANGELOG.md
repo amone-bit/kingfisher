@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - Added new liquid-rs filters: HmacSha1, IsoTimestampNoFracFilter, Replace
 - Added rules for mistral, perplexity
 - Added validation for Alibaba rule
+- Set GIT_TERMINAL_PROMPT=0 when cloning git repos
 
 ## [1.19.0]
 - JSON output was missing committer name and email
