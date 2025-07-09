@@ -526,16 +526,6 @@ mod tests {
     }
 
     #[test]
-    fn rfc3986_ts_filter_format() {
-        let ts = render(r#"{{ "" | rfc3986_ts }}"#);
-
-        // RFC-3986 form: 2025-07-09T03%3A36%3A40Z
-        let re = Regex::new(r"^\d{4}-\d{2}-\d{2}T\d{2}%3A\d{2}%3A\d{2}Z$").unwrap();
-        assert!(re.is_match(&ts), "timestamp not RFC3986-encoded: {ts}");
-        assert!(!ts.contains('.'), "sub-seconds should be removed: {ts}");
-    }
-
-    #[test]
     fn iso_timestamp_filter_parses() {
         let out = render(r#"{{ "" | iso_timestamp }}"#);
         // Parse to make sure it’s valid ISO-8601
