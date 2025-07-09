@@ -84,7 +84,51 @@ rules:
 | **XmlValid**    | –                                                                                                           | Pass only if body parses as well-formed XML. Use when response is expected as XML data                             |
 | **ReportResponse** | `report_response` (bool)                                                                                | Include raw payload in finding for debugging.                             |
 
+## 2. Templating with Liquid
+Kingfisher leverages the Liquid template engine for dynamic parts of HTTP request bodies, headers, query parameters, and multipart payloads. The engine supports both built-in and custom filters to manipulate the captured secret (TOKEN) or other named captures ({{ NAME }}).
 
+### Using Liquid Filters in Validation
+- **Capture Injection**: The unnamed capture from your regex becomes {{ TOKEN }}. Named captures are made available as uppercase variables (e.g. {{ RDMVAL }}).
+- **Filter Pipeline**: You can chain filters using the pipe (|) syntax:
+
+```liquid
+{{ TOKEN | b64enc | url_encode }}
+```
+Arguments: Some filters accept parameters, provided after a colon:
+
+```liquid
+{{ TOKEN | hmac_sha256: "my-secret-key" }}
+```
+
+### 3. Built-in & Custom Liquid Filters
+
+Below is the complete list of Liquid filters available in Kingfisher, along with their usage patterns and examples.
+| Filter                | Parameters                                   | Description                                                                                                    | Example                                                             |
+| --------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `b64enc`              | –                                            | Base64-encodes the input using the standard alphabet.                                                          | `{{ TOKEN \| b64enc }}`                                              |
+| `b64url_enc`          | –                                            | URL-safe Base64 (no padding). Useful for JWT headers & payloads.                                               | `{{ TOKEN \| b64url_enc }}`                                          |
+| `sha256`              | –                                            | Computes the SHA-256 hex digest of the input.                                                                  | `{{ TOKEN \| sha256 }}`                                              |
+| `hmac_sha1`           | `key` (string)                               | Computes HMAC-SHA1 over the input, returns Base64-encoded result.                                              | `{{ TOKEN \| hmac_sha1: "secret-key" }}`                             |
+| `hmac_sha256`         | `key` (string)                               | Computes HMAC-SHA256 over the input, returns Base64-encoded result.                                            | `{{ TOKEN \| hmac_sha256: "secret-key" }}`                           |
+| `hmac_sha384`         | `key` (string)                               | Computes HMAC-SHA384 over the input, returns Base64-encoded result.                                            | `{{ TOKEN \| hmac_sha384: "secret-key" }}`                           |
+| `random_string`       | `len` (integer, optional)                    | Generates a cryptographically-secure random alphanumeric string of the specified length (default: 32).        | `{{ "" \| random_string: 16 }}`                                      |
+| `url_encode`          | –                                            | Percent-encodes the input according to RFC 3986.                                                                | `{{ TOKEN \| url_encode }}`                                          |
+| `json_escape`         | –                                            | Escapes special characters so a string can be safely injected into JSON contexts.                              | `{{ TOKEN \| json_escape }}`                                         |
+| `unix_timestamp`      | –                                            | Returns the current Unix epoch time in seconds (UTC).                                                          | `{{ "" \| unix_timestamp }}`                                         |
+| `iso_timestamp`       | –                                            | Returns the current UTC timestamp in full ISO-8601 format (may include fractional seconds).                    | `{{ "" \| iso_timestamp }}`                                          |
+| `iso_timestamp_no_frac` | –                                          | Current ISO-8601 timestamp (UTC) **without** fractional seconds.                                               | `{{ "" \| iso_timestamp_no_frac }}`                                  |
+| `uuid`                | –                                            | Generates a random UUIDv4 string.                                                                              | `{{ "" \| uuid }}`                                                   |
+| `jwt_header`          | –                                            | Builds a minimal JWT header JSON (`{"typ":"JWT","alg":…}`) and Base64URL-encodes it.                           | `{{ "HS256" \| jwt_header }}`                                        |
+| `replace`             | `from` (string), `to` (string)               | Replaces every occurrence of `from` with `to` in the input string.                                             | `{{ "hello world" \| replace: "world", "mars" }}`                    |
+
+
+**Chaining & Composition:** Filters can be stacked; e.g.:
+
+```liquid
+Authorization: Basic {{ "api:" | append: TOKEN | b64enc }}
+```
+
+**Runtime Values:** Filters like unix_timestamp and uuid are evaluated at runtime, enabling nonces, timestamps, and unique IDs in your requests.
 ### How depends_on_rule Works
 
 - **Dependency Declaration:**  
