@@ -1,6 +1,6 @@
 rules:
   - name: Perplexity AI API Key
-    id:   kingfisher.perplexity.1
+    id: kingfisher.perplexity.1
     pattern: |
       (?xi)
       \b

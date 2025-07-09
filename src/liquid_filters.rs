@@ -8,8 +8,8 @@ use liquid_core::{
 };
 use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 use rand::{distr::Alphanumeric, Rng};
-use sha2::{Digest, Sha256, Sha384};
 use sha1::Sha1;
+use sha2::{Digest, Sha256, Sha384};
 use time::{format_description::well_known::Iso8601, OffsetDateTime};
 use uuid::Uuid;
 
@@ -145,10 +145,9 @@ impl Filter for HmacSha256Filter {
     }
 }
 
-
 // ── HMAC-SHA1 ─────────────────────────────────────────────
 #[derive(Debug, FilterParameters)]
-struct Hmac1Args {
+struct HmacSha1Args {
     #[parameter(description = "HMAC key", arg_type = "str")]
     key: Expression,
 }
@@ -157,7 +156,7 @@ struct Hmac1Args {
 #[filter(
     name = "hmac_sha1",
     description = "HMAC-SHA1 – returns Base64.",
-    parameters(Hmac1Args),
+    parameters(HmacSha1Args),
     parsed(HmacSha1Filter)
 )]
 pub struct HmacSha1;
@@ -166,7 +165,7 @@ pub struct HmacSha1;
 #[name = "hmac_sha1"]
 struct HmacSha1Filter {
     #[parameters]
-    args: Hmac1Args,
+    args: HmacSha1Args,
 }
 
 impl Filter for HmacSha1Filter {
@@ -334,7 +333,6 @@ static_filter!(
     }
 );
 
-
 // {{ "" | iso_timestamp_no_frac }}
 static_filter!(
     /// Current ISO-8601 timestamp (UTC) with no fractional seconds.
@@ -379,7 +377,7 @@ static_filter!(
 pub fn register_all(builder: liquid::ParserBuilder) -> liquid::ParserBuilder {
     builder
         // zero-arg helpers
-        .filter(Replace::default()) 
+        .filter(Replace::default())
         .filter(B64UrlEncFilter::default())
         .filter(Sha256Filter::default())
         .filter(UrlEncodeFilter::default())
@@ -403,9 +401,9 @@ mod tests {
     use liquid::{object, ParserBuilder};
     use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
     use regex::Regex;
+    use sha1::Sha1;
     use sha2::{Digest, Sha256, Sha384};
     use time::OffsetDateTime;
-    use sha1::Sha1;
 
     use super::*;
 
@@ -543,5 +541,22 @@ mod tests {
         let v = render(r#"{{ "" | uuid }}"#);
         assert!(uuid_re.is_match(&v));
     }
-    
+    // -------------------------------------------------------------------------
+    // Replace filter
+    // -------------------------------------------------------------------------
+    #[test]
+    fn replace_filter() {
+        assert_eq!(render(r#"{{ "hello world" | replace: "world", "mars" }}"#), "hello mars");
+    }
+
+    // -------------------------------------------------------------------------
+    // iso_timestamp_no_frac filter
+    // -------------------------------------------------------------------------
+    #[test]
+    fn iso_timestamp_no_frac_filter() {
+        let ts = render(r#"{{ "" | iso_timestamp_no_frac }}"#);
+        assert!(!ts.contains('.'), "timestamp should not include fractional seconds: {ts}");
+        // Verify it’s still valid ISO-8601
+        assert!(OffsetDateTime::parse(&ts, &Iso8601::DEFAULT).is_ok());
+    }
 }

@@ -112,7 +112,6 @@ pub fn build_request_builder(
         request_builder = request_builder.body(rendered_body);
     }
 
-
     Ok(request_builder)
 }
 
@@ -441,15 +440,8 @@ mod tests {
         let headers =
             BTreeMap::from([("Content-Type".to_string(), "application/json".to_string())]);
         let url = Url::from_str("https://example.com").unwrap();
-        let result = build_request_builder(
-            &client,
-            "GET",
-            &url,
-            &headers,
-            &None,
-            &parser,
-            &globals,
-        );
+        let result =
+            build_request_builder(&client, "GET", &url, &headers, &None, &parser, &globals);
         assert!(result.is_ok());
     }
     #[tokio::test]
@@ -527,5 +519,4 @@ mod tests {
         // 4️⃣  It *should* be valid (true) because all matcher conditions hold
         assert!(ok, "Slack webhook response should be considered ACTIVE");
     }
-    
 }

@@ -234,14 +234,10 @@ Kingfisher automatically queries GitHub for a newer release when it starts and t
 
 - **Hands-free updates** – Add `--self-update` to any Kingfisher command
 
-  If a newer version exists, Kingfisher will download it, replace the running
-  binary, and re-launch itself with the **exact same arguments**.  
+  * If a newer version exists, Kingfisher will download it, replace the running binary, and re-launch itself with the **exact same arguments**.  
+  * If the update fails or no newer release is found, the current run proceeds as normal
 
-  If the update fails or no newer release is found, the current run
-  proceeds as normal
-
-- **Disable version checks** – Pass `--no-update-check` to skip both the
-  startup and shutdown checks entirely
+- **Disable version checks** – Pass `--no-update-check` to skip both the startup and shutdown checks entirely
 
 ---
 
