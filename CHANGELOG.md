@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+
+## [1.20.0]
+- Removed confirmation prompt when user provides --self-update flag
+- Added support for HTTP request bodies in rule validation 
+- Added rules for mistral, perplexity
+
 ## [1.19.0]
 - JSON output was missing committer name and email
 - Fixed Gitlab rule which was incorrectly identifying certain tokens as valid

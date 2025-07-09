@@ -19,7 +19,7 @@ rules:
       (?xi)
       \b
       alibaba
-      (?:.|[\n\r]){0,16}?
+      (?:.|[\n\r]){0,32}?
       \b
       (
         [a-z0-9]{30}
@@ -30,4 +30,37 @@ rules:
     examples:
       - alibaba_secret = 7jkWdTjKLnSlGddwPR5gBn65PHcZG6
       - alibaba-token = aJHKLnSlGddwPR5g7jkWdTBn65PHc5
-    
+    validation:
+      type: Http
+      content:
+        request:
+          method: GET
+          url: >
+            {% assign nonce   = "" | uuid | url_encode -%}
+            {% assign ts      = "" | iso_timestamp | url_encode -%}
+            {% capture qs -%}
+              AccessKeyId={{ AKID }}&
+              Action=GetCallerIdentity&
+              Format=JSON&
+              SignatureMethod=HMAC-SHA1&
+              SignatureNonce={{ nonce }}&
+              SignatureVersion=1.0&
+              Timestamp={{ ts }}&
+              Version=2015-04-01
+            {%- endcapture %}
+            {% capture sts -%}GET&%2F&{{ qs | url_encode }}{%- endcapture %}
+            {% assign key    = TOKEN | append: '&' -%}
+            {% assign sig    = sts | hmac_sha256: key | b64enc | url_encode -%}
+            https://sts.aliyuncs.com/?{{ qs }}&Signature={{ sig }}
+          headers:
+            Accept: application/json
+          response_matcher:
+            - report_response: true
+            - type: StatusMatch
+              status: [200]
+            - type: WordMatch
+              words: ['"Arn"']
+              match_all_words: true
+    depends_on_rule:
+      - rule_id: kingfisher.alibabacloud.1
+        variable: AKID
