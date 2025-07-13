@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.21.0]
+- Improved Azure Storage rule
+- Added rule to detect TravisCI encrypted values
 
 ## [1.20.0]
 - Removed confirmation prompt when user provides --self-update flag

@@ -163,7 +163,9 @@ impl<'a> Display for PrettyFinding<'a> {
         writeln!(f, " |Fingerprint...: {}", rm.m.finding_fingerprint)?;
         writeln!(f, " |Confidence....: {}", rm.match_confidence.to_string())?;
         writeln!(f, " |Entropy.......: {:.2}", rm.m.calculated_entropy)?;
-        let validation_status = if rm.validation_response_status == StatusCode::CONTINUE.as_u16() {
+        let validation_status = if rm.validation_response_status == StatusCode::CONTINUE.as_u16()
+            || rm.validation_response_status == StatusCode::PRECONDITION_REQUIRED.as_u16()
+        {
             "Not Attempted".to_string()
         } else if rm.validation_success {
             "Active Credential".to_string()
