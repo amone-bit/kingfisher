@@ -133,7 +133,7 @@ async fn test_validation_cache_and_depvars() -> Result<()> {
             extraction_depth: 2,
             no_binary: true,
             no_extract_archives: false,
-            ignore: Vec::new(),
+            exclude: Vec::new(), // Exclude patterns
         },
         confidence: ConfidenceLevel::Low,
         no_validate: false,
@@ -146,6 +146,8 @@ async fn test_validation_cache_and_depvars() -> Result<()> {
         no_dedup: true, // keep duplicates so the cache is stressed
         ignore_tests: false,
         snippet_length: 128,
+        baseline_file: None,
+        manage_baseline: false,
     };
 
     /* --------------------------------------------------------- *

@@ -246,13 +246,7 @@ fn make_fs_enumerator(
         // Pass no_dedup when enumerating git history
         ie.no_dedup(args.no_dedup);
 
-        // Load any specified ignore files
-        for ignore_path in args.content_filtering_args.ignore.iter() {
-            debug!("Using ignore rules from {}", ignore_path.display());
-            ie.add_ignore(ignore_path).with_context(|| {
-                format!("Failed to load ignore rules from {}", ignore_path.display())
-            })?;
-        }
+        ie.set_exclude_patterns(&args.content_filtering_args.exclude)?;
         // Determine whether to collect git metadata or not
         let collect_git_metadata = false;
         ie.collect_git_metadata(collect_git_metadata);

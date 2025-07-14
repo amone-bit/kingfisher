@@ -161,6 +161,7 @@ trust-dns-resolver   = { version = "0.23.2", default-features = false, features 
 atty = "0.2.14"
 self_update = { version = "0.42.0", default-features = false, features = ["rustls", "archive-tar", "archive-zip", "compression-flate2"] }
 semver = "1.0.26"
+globset = "0.4.16"
 
 [dependencies.tikv-jemallocator]
 version = "0.6"

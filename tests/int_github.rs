@@ -77,7 +77,7 @@ fn test_github_remote_scan() -> Result<()> {
             no_extract_archives: false,
             extraction_depth: 2,
             no_binary: true,
-            ignore: Vec::new(),
+            exclude: Vec::new(), // Exclude patterns
         },
         confidence: ConfidenceLevel::Medium,
         no_validate: false,
@@ -90,6 +90,8 @@ fn test_github_remote_scan() -> Result<()> {
         no_dedup: true,
         ignore_tests: false,
         snippet_length: 256,
+        baseline_file: None,
+        manage_baseline: false,
     };
     // Create global arguments
     let global_args = GlobalArgs {

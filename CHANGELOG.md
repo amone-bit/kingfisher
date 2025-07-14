@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 ## [1.21.0]
 - Improved Azure Storage rule
 - Added rule to detect TravisCI encrypted values
+- Added baseline feature with `--baseline-file` and `--manage-baseline` flags
+- Introduced `--exclude` option for skipping paths
+- Added tests covering baseline and exclude workflow
+
 
 ## [1.20.0]
 - Removed confirmation prompt when user provides --self-update flag

@@ -351,7 +351,7 @@ fn test_pretty_format_with_nan_entropy_panics() {
             max_file_size_mb: 25.0,
             no_extract_archives: false,
             extraction_depth: 2,
-            ignore: Vec::new(),
+            exclude: Vec::new(), // Exclude patterns
             no_binary: true,
         },
 
@@ -369,6 +369,8 @@ fn test_pretty_format_with_nan_entropy_panics() {
 
         // display
         snippet_length: 256,
+        baseline_file: None,
+        manage_baseline: false,
     };
 
     // This will panic if the entropy isn't checked for NaN
